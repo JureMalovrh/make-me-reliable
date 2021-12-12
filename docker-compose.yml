@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  reliable-api:
+    image: reliable-api:latest
+    env_file: .env
+    ports:
+      - "8080:${SERVER_PORT}"
+    depends_on:
+      - mongo
+  reliable-api-dev:
+    image: reliable-api:dev
+    env_file: .env
+    depends_on:
+      - mongo
+  unreliable-api:
+    image: unreliable-api:latest
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    env_file: .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
