@@ -41,12 +41,12 @@ func TestMongoRepository_GetUnfinishedJobsCtx(t *testing.T) {
 	j2.Message = "test message"
 	j2.Finished = true
 
-	x, err := col.InsertOne(context.TODO(), j)
+	_, err = col.InsertOne(context.TODO(), j)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	x, err = col.InsertOne(context.TODO(), j2)
+	_, err = col.InsertOne(context.TODO(), j2)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,7 +143,6 @@ func TestMongoRepository_UpdateJobCtx(t *testing.T) {
 	r := NewMongoRepository(col)
 
 	j := NewJob()
-	fmt.Println(j)
 	j.Message = "test message"
 	j.Finished = false
 	j.LastTried = time.Now()
