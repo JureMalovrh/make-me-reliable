@@ -34,3 +34,7 @@ To run it, run `docker-compose up unreliable-api` and set correct values inside 
 ###Arhitecture
 TODO
 
+
+
+### Notes:
+- tests are not done in DRY way (read: copy-pasting), also some e2e tests are missing as we have only covered unit/integration part

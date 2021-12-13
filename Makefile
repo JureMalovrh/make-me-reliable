@@ -11,10 +11,7 @@ clean:
 	docker image rm reliable-api:dev
 	docker image rm reliable-api:latest
 
-test-deps:
-	docker-compose up -d mongo
-
-test: dev test-deps
+test: dev
 	docker-compose run --rm reliable-api-dev go test -v -race ./...
 
 lint: dev
