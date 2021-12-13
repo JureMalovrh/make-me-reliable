@@ -43,15 +43,13 @@ func newSignHandler(rdb repository.Repository, rl rate_limit.RateLimit) func(w h
 			res, err := callExternalApi(ctx, rl, message)
 			if err != nil {
 				logrus.Errorf("Error %v", err)
-			}
-
-			if err == nil {
+			} else {
 				// only if err == nil means everything was fine and we can proceed with result
 				j.Finished = true
 				j.Result = res
 			}
-
 		}
+		// If context from before was canceled - create a new one so we can insert job into DB
 		if ctx.Err() != nil {
 			ctx, cancel = context.WithTimeout(r.Context(), time.Second*1)
 			defer cancel()
