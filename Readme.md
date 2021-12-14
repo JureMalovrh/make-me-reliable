@@ -50,3 +50,4 @@ For limitation of 10 RPS - we used Token buckets, where every 1 minute we get 10
 - At the time of writing this Readme, the provided API that is supposed to test out behaviour was not working, so we have implemented a custom unreliable API that fails in 50% of the cases.
   To run it, run `docker-compose up unreliable-api` and set correct values inside .env file (use `unreliable-api` as API_URL).
 - tests are not done in DRY way (read: copy-pasting), also some e2e tests are missing as we have only covered unit/integration part
+- Repository Job would in production code be completly database agnostic (no bson mapping would be inside, ObjectId would be string, etc.). Some corners were cut :(.
