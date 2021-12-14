@@ -55,6 +55,10 @@ func (w *RateLimitedWorker) StartWork(close chan interface{}) {
 			res, err := w.r.Do(ctx, map[string]string{"message": job.Message})
 			if err != nil {
 				logrus.Errorf("Request fail: %+v", err)
+				job.LastTried = time.Now()
+				if err := w.c.UpdateJobCtx(ctx, job); err != nil {
+					logrus.Errorf("DB error: %+v", err)
+				}
 				continue
 			}
 
